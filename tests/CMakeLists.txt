@@ -15,6 +15,7 @@ add_executable(
   hello_test.cpp
   ../src/huffman.cpp
   huffman_test.cpp
+  huffman_tree_test.cpp
 )
 
 target_link_libraries(
