@@ -11,21 +11,21 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 enable_testing()
 
 add_executable(
-  hello_test
+  slimki_test
   hello_test.cpp
 )
 
 target_link_libraries(
-  hello_test
+  slimki_test
   GTest::gtest_main
 )
 
 include(GoogleTest)
 
-gtest_discover_tests(hello_test)
+gtest_discover_tests(slimki_test)
 
 add_custom_command(
-  TARGET hello_test
+  TARGET slimki_test
   COMMENT "Run tests"
   POST_BUILD 
   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
