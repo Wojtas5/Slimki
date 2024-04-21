@@ -13,6 +13,8 @@ enable_testing()
 add_executable(
   slimki_test
   hello_test.cpp
+  ../src/huffman.cpp
+  huffman_test.cpp
 )
 
 target_link_libraries(
