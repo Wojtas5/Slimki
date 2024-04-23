@@ -14,8 +14,10 @@ add_executable(
   slimki_test
   hello_test.cpp
   ../src/huffman.cpp
+  ../src/huffman_tree.cpp
   huffman_test.cpp
   huffman_tree_test.cpp
+  huffman_tree_utils.cpp
 )
 
 target_link_libraries(

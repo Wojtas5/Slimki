@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "huffman.h"
+#include "huffman_tree_utils.h"
 
 TEST(HuffmanTest, CountsFrequenciesOfAllUniqueValues)
 {
@@ -11,35 +12,6 @@ TEST(HuffmanTest, CountsFrequenciesOfAllUniqueValues)
 TEST(HuffmanTest, ReturnEmptyMapOnEmptyInput)
 {
     ASSERT_TRUE(CountUniqueValueFrequencies({}).empty());
-}
-
-bool AreNodesEqual(const HuffmanTreeNode& node1, const HuffmanTreeNode& node2)
-{
-    return ((node1.value == node2.value) && (node1.frequency == node2.frequency));
-}
-
-bool NodeQueuesEqual(HuffmanTreeNodePriorityQueue queue1,
-    std::queue<std::shared_ptr<HuffmanTreeNode>> queue2)
-{
-    if (queue1.size() != queue2.size())
-    {
-        return false;
-    }
-
-    while (!queue1.empty() && !queue2.empty())
-    {
-        std::shared_ptr<HuffmanTreeNode> node1 = queue1.top();
-        std::shared_ptr<HuffmanTreeNode> node2 = queue2.front();
-        if (!AreNodesEqual(*node1, *node2))
-        {
-            return false;
-        }
-
-        queue1.pop();
-        queue2.pop();
-    }
-
-    return true;
 }
 
 TEST(HuffmanTest, CreatesPriorityQueueOfNodesFromMapSortedBySmallestFrequency)
@@ -54,3 +26,11 @@ TEST(HuffmanTest, CreatesPriorityQueueOfNodesFromMapSortedBySmallestFrequency)
 
     ASSERT_TRUE(NodeQueuesEqual(huffman.CreateNodesQueue(value_frequency_map), output_queue));
 }
+
+/* Creating huffman code
+1. Traverse the tree to gather the codes for a specific value and save them as a map {val(char), code(string)}
+2. Iterate over the input and replace the values for codes
+   - At each iteration append bits to a byte variable
+   - When the full byte is filled append it to a vector
+   - Carry over the remaining bits for next iteration
+*/
