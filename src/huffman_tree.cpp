@@ -1,11 +1,9 @@
 #include "huffman_tree.h"
 
-HuffmanTree::HuffmanTree() : m_root(nullptr)
-{}
-
-HuffmanTree::HuffmanTree(HuffmanTreeNodePriorityQueue nodes_queue)
+HuffmanTree::HuffmanTree(const std::unordered_map<unsigned char, int>& value_frequency_map)
     : m_root(nullptr)
 {
+    NodePriorityQueue nodes_queue = CreateNodesQueue(value_frequency_map);
     if (nodes_queue.size() == 1)
     {
         m_root = nodes_queue.top();
@@ -15,12 +13,12 @@ HuffmanTree::HuffmanTree(HuffmanTreeNodePriorityQueue nodes_queue)
 
     while (nodes_queue.size() > 1)
     {
-        std::shared_ptr<HuffmanTreeNode> left_child = nodes_queue.top();
+        auto left_child = nodes_queue.top();
         nodes_queue.pop();
-        std::shared_ptr<HuffmanTreeNode> right_child = nodes_queue.top();
+        auto right_child = nodes_queue.top();
         nodes_queue.pop();
 
-        std::shared_ptr<HuffmanTreeNode> internal_node = std::make_shared<HuffmanTreeNode>(
+        auto internal_node = std::make_shared<HuffmanTreeNode>(
             HuffmanTreeNode({ 0, left_child->frequency + right_child->frequency }));
         internal_node->left = left_child;
         internal_node->right = right_child;
@@ -28,4 +26,15 @@ HuffmanTree::HuffmanTree(HuffmanTreeNodePriorityQueue nodes_queue)
 
         m_root = internal_node;
     }
+}
+
+HuffmanTree::NodePriorityQueue HuffmanTree::CreateNodesQueue(
+    const std::unordered_map<unsigned char, int>& value_frequency_map)
+{
+    NodePriorityQueue nodes_priority_queue;
+    for (auto entry : value_frequency_map)
+    {
+        nodes_priority_queue.push(std::make_shared<HuffmanTreeNode>(entry));
+    }
+    return nodes_priority_queue;
 }

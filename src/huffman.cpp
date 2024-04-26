@@ -10,14 +10,3 @@ std::unordered_map<unsigned char, int> CountUniqueValueFrequencies(
     }
     return value_frequency_map;
 }
-
-HuffmanTreeNodePriorityQueue Huffman::CreateNodesQueue(
-    const std::unordered_map<unsigned char, int>& value_frequency_map)
-{
-    HuffmanTreeNodePriorityQueue nodes_priority_queue;
-    for (auto entry : value_frequency_map)
-    {
-        nodes_priority_queue.push(std::make_shared<HuffmanTreeNode>(entry));
-    }
-    return nodes_priority_queue;
-}

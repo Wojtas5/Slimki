@@ -7,9 +7,7 @@
 
 class Huffman
 {
-public:
-    HuffmanTreeNodePriorityQueue CreateNodesQueue(
-        const std::unordered_map<unsigned char, int>& value_frequency_map);
+
 };
 
 std::unordered_map<unsigned char, int> CountUniqueValueFrequencies(

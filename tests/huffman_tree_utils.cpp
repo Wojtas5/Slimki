@@ -6,7 +6,7 @@ bool AreNodesEqual(const HuffmanTreeNode& node1, const HuffmanTreeNode& node2)
     return ((node1.value == node2.value) && (node1.frequency == node2.frequency));
 }
 
-bool NodeQueuesEqual(HuffmanTreeNodePriorityQueue queue1,
+bool NodeQueuesEqual(HuffmanTree::NodePriorityQueue queue1,
     std::queue<std::shared_ptr<HuffmanTreeNode>> queue2)
 {
     if (queue1.size() != queue2.size())
@@ -16,8 +16,8 @@ bool NodeQueuesEqual(HuffmanTreeNodePriorityQueue queue1,
 
     while (!queue1.empty() && !queue2.empty())
     {
-        std::shared_ptr<HuffmanTreeNode> node1 = queue1.top();
-        std::shared_ptr<HuffmanTreeNode> node2 = queue2.front();
+        auto node1 = queue1.top();
+        auto node2 = queue2.front();
         if (!AreNodesEqual(*node1, *node2))
         {
             return false;
@@ -31,7 +31,7 @@ bool NodeQueuesEqual(HuffmanTreeNodePriorityQueue queue1,
 }
 
 bool TreesEqual(const std::shared_ptr<HuffmanTreeNode> first_tree,
-    const std::shared_ptr<HuffmanTreeNode> second_tree)
+                const std::shared_ptr<HuffmanTreeNode> second_tree)
 {
     if (first_tree == nullptr && second_tree == nullptr)
     {
@@ -50,7 +50,7 @@ bool TreesEqual(const std::shared_ptr<HuffmanTreeNode> first_tree,
     }
 
     return TreesEqual(first_tree->left, second_tree->left) &&
-        TreesEqual(first_tree->right, second_tree->right);
+           TreesEqual(first_tree->right, second_tree->right);
 }
 
 TEST(TreesEqualTest, ReturnsTrueWhenBothTreesAreNull)
@@ -60,14 +60,14 @@ TEST(TreesEqualTest, ReturnsTrueWhenBothTreesAreNull)
 
 TEST(TreesEqualTest, ReturnsTrueWhenTheSameNodeIsPassed)
 {
-    std::shared_ptr<HuffmanTreeNode> test_node =
+    auto test_node =
         std::make_shared<HuffmanTreeNode>(HuffmanTreeNode { { 0, 0 } });
     ASSERT_TRUE(TreesEqual(test_node, test_node));
 }
 
 TEST(TreesEqualTest, ReturnsTrueWhenTheSameTreeIsPassed)
 {
-    std::shared_ptr<HuffmanTreeNode> test_root =
+    auto test_root =
         std::make_shared<HuffmanTreeNode>(HuffmanTreeNode { { 0, 0 } });
     test_root->left = std::make_shared<HuffmanTreeNode>(HuffmanTreeNode({ 1, 1 }));
     test_root->right = std::make_shared<HuffmanTreeNode>(HuffmanTreeNode({ 255, 2 }));
@@ -77,12 +77,12 @@ TEST(TreesEqualTest, ReturnsTrueWhenTheSameTreeIsPassed)
 
 TEST(TreesEqualTest, ReturnsTrueWhenTheTwoIdenticalTreesArePassed)
 {
-    std::shared_ptr<HuffmanTreeNode> test_root1 =
+    auto test_root1 =
         std::make_shared<HuffmanTreeNode>(HuffmanTreeNode { { 0, 0 } });
     test_root1->left = std::make_shared<HuffmanTreeNode>(HuffmanTreeNode({ 1, 1 }));
     test_root1->right = std::make_shared<HuffmanTreeNode>(HuffmanTreeNode({ 255, 2 }));
 
-    std::shared_ptr<HuffmanTreeNode> test_root2 =
+    auto test_root2 =
         std::make_shared<HuffmanTreeNode>(HuffmanTreeNode { { 0, 0 } });
     test_root2->left = std::make_shared<HuffmanTreeNode>(HuffmanTreeNode({ 1, 1 }));
     test_root2->right = std::make_shared<HuffmanTreeNode>(HuffmanTreeNode({ 255, 2 }));
@@ -92,12 +92,12 @@ TEST(TreesEqualTest, ReturnsTrueWhenTheTwoIdenticalTreesArePassed)
 
 TEST(TreesEqualTest, ReturnsFalseWhenTheDifferentTreesArePassed)
 {
-    std::shared_ptr<HuffmanTreeNode> test_root1 =
+    auto test_root1 =
         std::make_shared<HuffmanTreeNode>(HuffmanTreeNode { { 0, 0 } });
     test_root1->left = std::make_shared<HuffmanTreeNode>(HuffmanTreeNode({ 1, 1 }));
     test_root1->right = std::make_shared<HuffmanTreeNode>(HuffmanTreeNode({ 255, 2 }));
 
-    std::shared_ptr<HuffmanTreeNode> test_root2 =
+    auto test_root2 =
         std::make_shared<HuffmanTreeNode>(HuffmanTreeNode { { 11, 11 } });
     test_root2->left = std::make_shared<HuffmanTreeNode>(HuffmanTreeNode({ 22, 22 }));
     test_root2->right = std::make_shared<HuffmanTreeNode>(HuffmanTreeNode({ 33, 33 }));
@@ -107,12 +107,12 @@ TEST(TreesEqualTest, ReturnsFalseWhenTheDifferentTreesArePassed)
 
 TEST(TreesEqualTest, ReturnsFalseWhenOneTreeIsMissingRightNode)
 {
-    std::shared_ptr<HuffmanTreeNode> test_root1 =
+    auto test_root1 =
         std::make_shared<HuffmanTreeNode>(HuffmanTreeNode { { 0, 0 } });
     test_root1->left = std::make_shared<HuffmanTreeNode>(HuffmanTreeNode({ 1, 1 }));
     test_root1->right = std::make_shared<HuffmanTreeNode>(HuffmanTreeNode({ 255, 2 }));
 
-    std::shared_ptr<HuffmanTreeNode> test_root2 =
+    auto test_root2 =
         std::make_shared<HuffmanTreeNode>(HuffmanTreeNode { { 0, 0 } });
     test_root2->left = std::make_shared<HuffmanTreeNode>(HuffmanTreeNode({ 1, 1 }));
 
@@ -121,12 +121,12 @@ TEST(TreesEqualTest, ReturnsFalseWhenOneTreeIsMissingRightNode)
 
 TEST(TreesEqualTest, ReturnsFalseWhenOneTreeIsMissingLeftNode)
 {
-    std::shared_ptr<HuffmanTreeNode> test_root1 =
+    auto test_root1 =
         std::make_shared<HuffmanTreeNode>(HuffmanTreeNode { { 0, 0 } });
     test_root1->left = std::make_shared<HuffmanTreeNode>(HuffmanTreeNode({ 1, 1 }));
     test_root1->right = std::make_shared<HuffmanTreeNode>(HuffmanTreeNode({ 255, 2 }));
 
-    std::shared_ptr<HuffmanTreeNode> test_root2 =
+    auto test_root2 =
         std::make_shared<HuffmanTreeNode>(HuffmanTreeNode { { 0, 0 } });
     test_root2->right = std::make_shared<HuffmanTreeNode>(HuffmanTreeNode({ 255, 2 }));
 
