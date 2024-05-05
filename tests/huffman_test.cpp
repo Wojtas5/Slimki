@@ -14,6 +14,16 @@ TEST(HuffmanTest, ReturnEmptyMapOnEmptyInput)
     ASSERT_TRUE(CountUniqueValueFrequencies({}).empty());
 }
 
+TEST(HuffmanTest, GathersHuffmanCodesFromTree)
+{
+    std::unordered_map<unsigned char, std::string> expected_codes { {255, "00"}, {0, "01"}, {11, "1"} };
+    std::unordered_map<unsigned char, int> value_frequency_map { {255, 1}, {0, 2}, {11, 4} };
+    HuffmanTree huffman_tree(value_frequency_map);
+    Huffman huffman;
+
+    ASSERT_EQ(huffman.DetermineCodes(huffman_tree.GetRoot()), expected_codes);
+}
+
 /* Creating huffman code
 1. Traverse the tree to gather the codes for a specific value and save them as a map {val(char), code(string)}
 2. Iterate over the input and replace the values for codes

@@ -16,6 +16,8 @@ struct HuffmanTreeNode
         : value(value_freq_pair.first), frequency(value_freq_pair.second),
           left(nullptr), right(nullptr)
     {}
+
+    bool IsLeaf() { return left == nullptr && right == nullptr; }
 };
 
 class HuffmanTree
