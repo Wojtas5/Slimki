@@ -24,10 +24,22 @@ TEST(HuffmanTest, GathersHuffmanCodesFromTree)
     ASSERT_EQ(huffman.DetermineCodes(huffman_tree.GetRoot()), expected_codes);
 }
 
-/* Creating huffman code
-1. Traverse the tree to gather the codes for a specific value and save them as a map {val(char), code(string)}
-2. Iterate over the input and replace the values for codes
-   - At each iteration append bits to a byte variable
-   - When the full byte is filled append it to a vector
-   - Carry over the remaining bits for next iteration
-*/
+TEST(HuffmanTest, ReplacesDataForHuffmanCodeforSingleValue)
+{
+    std::unordered_map<unsigned char, std::string> huffman_codes { {0, "01"} };
+    std::vector<unsigned char> test_data { 0 };
+    std::vector<unsigned char> compressed_data { 0b01000000 };
+    Huffman huffman;
+
+    ASSERT_EQ(huffman.ReplaceDataForCodes(test_data, huffman_codes), compressed_data);
+}
+
+TEST(HuffmanTest, ReplacesDataForHuffmanCodes)
+{
+    std::unordered_map<unsigned char, std::string> huffman_codes { {255, "00"}, {0, "01"}, {11, "1"} };
+    std::vector<unsigned char> test_data { 255, 0, 0, 11, 11, 11, 11 };
+    std::vector<unsigned char> compressed_data { 0b00010111, 0b11000000 };
+    Huffman huffman;
+
+    ASSERT_EQ(huffman.ReplaceDataForCodes(test_data, huffman_codes), compressed_data);
+}
