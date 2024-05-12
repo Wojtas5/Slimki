@@ -11,6 +11,13 @@ std::unordered_map<unsigned char, int> CountUniqueValueFrequencies(
     return value_frequency_map;
 }
 
+std::vector<unsigned char> Huffman::Encode(const std::vector<unsigned char>& data)
+{
+    HuffmanTree tree(algo_utils::CountUniqueValueFrequencies(data));
+    DetermineCodes(tree.GetRoot());
+    return ReplaceDataForCodes(data, m_huffman_codes_map);
+}
+
 std::unordered_map<unsigned char, std::string> Huffman::DetermineCodes(
     std::shared_ptr<HuffmanTreeNode>& node)
 {
