@@ -22,7 +22,4 @@ private:
         std::unordered_map<unsigned char, std::string>& huffman_codes);
 };
 
-std::unordered_map<unsigned char, int> CountUniqueValueFrequencies(
-    const std::vector<unsigned char>& values);
-
 #endif // HUFFMAN_H

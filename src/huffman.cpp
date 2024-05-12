@@ -1,15 +1,5 @@
 #include "huffman.h"
-
-std::unordered_map<unsigned char, int> CountUniqueValueFrequencies(
-    const std::vector<unsigned char>& values)
-{
-    std::unordered_map<unsigned char, int> value_frequency_map;
-    for (auto value : values)
-    {
-        ++value_frequency_map[value];
-    }
-    return value_frequency_map;
-}
+#include "algo_utils.h"
 
 std::vector<unsigned char> Huffman::Encode(const std::vector<unsigned char>& data)
 {

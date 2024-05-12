@@ -15,9 +15,11 @@ add_executable(
   hello_test.cpp
   ../src/huffman.cpp
   ../src/huffman_tree.cpp
+  ../src/algo_utils.cpp
   huffman_test.cpp
   huffman_tree_test.cpp
   huffman_tree_utils.cpp
+  algo_utils_test.cpp
 )
 
 target_link_libraries(
@@ -32,7 +34,7 @@ gtest_discover_tests(slimki_test)
 add_custom_command(
   TARGET slimki_test
   COMMENT "Run tests"
-  POST_BUILD 
+  POST_BUILD
   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
   COMMAND ${CMAKE_CTEST_COMMAND} -C $<CONFIGURATION> -R "^${UNIT_TEST}$" --output-on-failure
 )
