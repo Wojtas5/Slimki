@@ -4,7 +4,7 @@
 TEST(AlgoUtilsTest, CountsFrequenciesOfAllUniqueValues)
 {
     std::vector<unsigned char> test_values { 0, 1, 255, 1, 0 };
-    std::unordered_map<unsigned char, int> output { { 0, 2 }, { 1, 2 }, { 255, 1 } };
+    std::unordered_map<unsigned char, unsigned int> output { { 0, 2 }, { 1, 2 }, { 255, 1 } };
     ASSERT_EQ(algo_utils::CountUniqueValueFrequencies(test_values), output);
 }
 

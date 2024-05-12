@@ -8,16 +8,16 @@
 struct HuffmanTreeNode
 {
     unsigned char value;
-    int frequency;
+    unsigned int frequency;
     std::shared_ptr<HuffmanTreeNode> left;
     std::shared_ptr<HuffmanTreeNode> right;
 
-    HuffmanTreeNode(std::pair<unsigned char, int> value_freq_pair)
+    HuffmanTreeNode(std::pair<unsigned char, unsigned int> value_freq_pair)
         : value(value_freq_pair.first), frequency(value_freq_pair.second),
           left(nullptr), right(nullptr)
     {}
 
-    bool IsLeaf() { return left == nullptr && right == nullptr; }
+    bool IsLeaf() const { return left == nullptr && right == nullptr; }
 };
 
 class HuffmanTree
@@ -37,14 +37,14 @@ public:
                             std::vector<std::shared_ptr<HuffmanTreeNode>>,
                             LessFrequency>;
 
-    HuffmanTree(const std::unordered_map<unsigned char, int>& value_frequency_map);
+    HuffmanTree(const std::unordered_map<unsigned char, unsigned int>& value_frequency_map);
     std::shared_ptr<HuffmanTreeNode> GetRoot() const { return m_root; }
 
 private:
     std::shared_ptr<HuffmanTreeNode> m_root;
 
     NodePriorityQueue CreateNodesQueue(
-        const std::unordered_map<unsigned char, int>& value_frequency_map);
+        const std::unordered_map<unsigned char, unsigned int>& value_frequency_map) const;
 };
 
 #endif // HUFFMAN_TREE_H

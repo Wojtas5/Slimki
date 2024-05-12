@@ -3,7 +3,7 @@
 
 TEST(HuffmanTreeTest, ObjectCanBeCreatedOutOfMapEntry)
 {
-    std::unordered_map<unsigned char, int> value_frequency_map { { 0, 2 } };
+    std::unordered_map<unsigned char, unsigned int> value_frequency_map { { 0, 2 } };
     auto map_entry = *value_frequency_map.begin();
     HuffmanTreeNode node(map_entry);
 
@@ -15,7 +15,7 @@ TEST(HuffmanTreeTest, ObjectCanBeCreatedOutOfMapEntry)
 
 TEST(HuffmanTreeTest, RootIsNullOnEmptyMap)
 {
-    std::unordered_map<unsigned char, int> empty_map;
+    std::unordered_map<unsigned char, unsigned int> empty_map;
     HuffmanTree huffman_tree(empty_map);
 
     ASSERT_EQ(huffman_tree.GetRoot(), nullptr);
@@ -23,7 +23,7 @@ TEST(HuffmanTreeTest, RootIsNullOnEmptyMap)
 
 TEST(HuffmanTreeTest, ReturnsNotNullIfMapIsNotEmpty)
 {
-    std::unordered_map<unsigned char, int> value_frequency_map { { 0, 0 } };
+    std::unordered_map<unsigned char, unsigned int> value_frequency_map { { 0, 0 } };
     HuffmanTree huffman_tree(value_frequency_map);
 
     ASSERT_NE(huffman_tree.GetRoot(), nullptr);
@@ -31,7 +31,7 @@ TEST(HuffmanTreeTest, ReturnsNotNullIfMapIsNotEmpty)
 
 TEST(HuffmanTreeTest, CreatesHuffmanTree)
 {
-    std::unordered_map<unsigned char, int> value_frequency_map { {255, 1}, {0, 2} };
+    std::unordered_map<unsigned char, unsigned int> value_frequency_map { {255, 1}, {0, 2} };
     int value1_frequency = value_frequency_map[0];
     int value2_frequency = value_frequency_map[255];
 
@@ -44,12 +44,12 @@ TEST(HuffmanTreeTest, CreatesHuffmanTree)
 
 TEST(HuffmanTreeTest, CreatesBigHuffmanTree)
 {
-    auto value_frequency_pair1 = std::make_pair<unsigned char, int>('a', 5);
-    auto value_frequency_pair2 = std::make_pair<unsigned char, int>('b', 9);
-    auto value_frequency_pair3 = std::make_pair<unsigned char, int>('c', 12);
-    auto value_frequency_pair4 = std::make_pair<unsigned char, int>('d', 13);
-    auto value_frequency_pair5 = std::make_pair<unsigned char, int>('e', 16);
-    std::unordered_map<unsigned char, int> value_frequency_map {
+    auto value_frequency_pair1 = std::make_pair<unsigned char, unsigned int>('a', 5);
+    auto value_frequency_pair2 = std::make_pair<unsigned char, unsigned int>('b', 9);
+    auto value_frequency_pair3 = std::make_pair<unsigned char, unsigned int>('c', 12);
+    auto value_frequency_pair4 = std::make_pair<unsigned char, unsigned int>('d', 13);
+    auto value_frequency_pair5 = std::make_pair<unsigned char, unsigned int>('e', 16);
+    std::unordered_map<unsigned char, unsigned int> value_frequency_map {
         value_frequency_pair1,
         value_frequency_pair2,
         value_frequency_pair3,

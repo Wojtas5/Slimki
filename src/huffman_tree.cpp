@@ -1,6 +1,6 @@
 #include "huffman_tree.h"
 
-HuffmanTree::HuffmanTree(const std::unordered_map<unsigned char, int>& value_frequency_map)
+HuffmanTree::HuffmanTree(const std::unordered_map<unsigned char, unsigned int>& value_frequency_map)
     : m_root(nullptr)
 {
     NodePriorityQueue nodes_queue = CreateNodesQueue(value_frequency_map);
@@ -29,7 +29,7 @@ HuffmanTree::HuffmanTree(const std::unordered_map<unsigned char, int>& value_fre
 }
 
 HuffmanTree::NodePriorityQueue HuffmanTree::CreateNodesQueue(
-    const std::unordered_map<unsigned char, int>& value_frequency_map)
+    const std::unordered_map<unsigned char, unsigned int>& value_frequency_map) const
 {
     NodePriorityQueue nodes_priority_queue;
     for (auto entry : value_frequency_map)

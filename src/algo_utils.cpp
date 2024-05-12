@@ -3,10 +3,10 @@
 namespace algo_utils
 {
 
-std::unordered_map<unsigned char, int> CountUniqueValueFrequencies(
+std::unordered_map<unsigned char, unsigned int> CountUniqueValueFrequencies(
     const std::vector<unsigned char>& values)
 {
-    std::unordered_map<unsigned char, int> value_frequency_map;
+    std::unordered_map<unsigned char, unsigned int> value_frequency_map;
     for (auto value : values)
     {
         ++value_frequency_map[value];

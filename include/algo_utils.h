@@ -6,7 +6,7 @@
 namespace algo_utils
 {
 
-std::unordered_map<unsigned char, int> CountUniqueValueFrequencies(
+std::unordered_map<unsigned char, unsigned int> CountUniqueValueFrequencies(
     const std::vector<unsigned char>& values);
 
 }
