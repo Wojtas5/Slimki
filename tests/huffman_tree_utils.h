@@ -4,8 +4,6 @@
 #include "huffman_tree.h"
 
 bool AreNodesEqual(const HuffmanTreeNode& node1, const HuffmanTreeNode& node2);
-bool NodeQueuesEqual(HuffmanTree::NodePriorityQueue queue1,
-                     std::queue<std::shared_ptr<HuffmanTreeNode>> queue2);
 bool TreesEqual(const std::shared_ptr<HuffmanTreeNode> first_tree,
                 const std::shared_ptr<HuffmanTreeNode> second_tree);
 

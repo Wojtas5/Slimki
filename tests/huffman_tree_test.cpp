@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "huffman_tree_utils.h"
 
-TEST(HuffmanTreeTest, ObjectCanBeCreatedOutOfMapEntry)
+TEST(HuffmanTreeTest, HuffmanTreeNodeObjectCanBeCreatedOutOfMapEntry)
 {
     std::unordered_map<unsigned char, unsigned int> value_frequency_map { { 0, 2 } };
     auto map_entry = *value_frequency_map.begin();
@@ -11,6 +11,19 @@ TEST(HuffmanTreeTest, ObjectCanBeCreatedOutOfMapEntry)
     ASSERT_EQ(node.frequency, map_entry.second);
     ASSERT_EQ(node.left, nullptr);
     ASSERT_EQ(node.right, nullptr);
+}
+
+TEST(HuffmanTreeTest, IsLeafReturnsTrueWhenNoLeafs)
+{
+    HuffmanTreeNode node { {0, 0} };
+    ASSERT_TRUE(node.IsLeaf());
+}
+
+TEST(HuffmanTreeTest, IsLeafReturnsFalseWhenThereIsAtLeastOneLeaf)
+{
+    HuffmanTreeNode node { {0, 0} };
+    node.left = std::make_shared<HuffmanTreeNode>(HuffmanTreeNode({ 1,1 }));
+    ASSERT_FALSE(node.IsLeaf());
 }
 
 TEST(HuffmanTreeTest, RootIsNullOnEmptyMap)

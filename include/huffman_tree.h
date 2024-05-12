@@ -23,6 +23,10 @@ struct HuffmanTreeNode
 class HuffmanTree
 {
 public:
+    HuffmanTree(const std::unordered_map<unsigned char, unsigned int>& value_frequency_map);
+    std::shared_ptr<HuffmanTreeNode> GetRoot() const { return m_root; }
+
+private:
     struct LessFrequency
     {
         bool operator()(const std::shared_ptr<HuffmanTreeNode>& node1,
@@ -37,10 +41,6 @@ public:
                             std::vector<std::shared_ptr<HuffmanTreeNode>>,
                             LessFrequency>;
 
-    HuffmanTree(const std::unordered_map<unsigned char, unsigned int>& value_frequency_map);
-    std::shared_ptr<HuffmanTreeNode> GetRoot() const { return m_root; }
-
-private:
     std::shared_ptr<HuffmanTreeNode> m_root;
 
     NodePriorityQueue CreateNodesQueue(

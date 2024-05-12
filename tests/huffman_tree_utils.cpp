@@ -6,30 +6,6 @@ bool AreNodesEqual(const HuffmanTreeNode& node1, const HuffmanTreeNode& node2)
     return ((node1.value == node2.value) && (node1.frequency == node2.frequency));
 }
 
-bool NodeQueuesEqual(HuffmanTree::NodePriorityQueue queue1,
-    std::queue<std::shared_ptr<HuffmanTreeNode>> queue2)
-{
-    if (queue1.size() != queue2.size())
-    {
-        return false;
-    }
-
-    while (!queue1.empty() && !queue2.empty())
-    {
-        auto node1 = queue1.top();
-        auto node2 = queue2.front();
-        if (!AreNodesEqual(*node1, *node2))
-        {
-            return false;
-        }
-
-        queue1.pop();
-        queue2.pop();
-    }
-
-    return true;
-}
-
 bool TreesEqual(const std::shared_ptr<HuffmanTreeNode> first_tree,
                 const std::shared_ptr<HuffmanTreeNode> second_tree)
 {
