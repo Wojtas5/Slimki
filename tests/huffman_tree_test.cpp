@@ -34,9 +34,17 @@ TEST(HuffmanTreeTest, RootIsNullOnEmptyMap)
     ASSERT_EQ(huffman_tree.GetRoot(), nullptr);
 }
 
-TEST(HuffmanTreeTest, ReturnsNotNullIfMapIsNotEmpty)
+TEST(HuffmanTreeTest, RootIsNullIfMapHasSingleEntry)
 {
     std::unordered_map<unsigned char, unsigned int> value_frequency_map { { 0, 0 } };
+    HuffmanTree huffman_tree(value_frequency_map);
+
+    ASSERT_EQ(huffman_tree.GetRoot(), nullptr);
+}
+
+TEST(HuffmanTreeTest, RootIsNotNullIfMapHasMoreThanOneEntry)
+{
+    std::unordered_map<unsigned char, unsigned int> value_frequency_map { { 0, 0 }, { 1, 1 } };
     HuffmanTree huffman_tree(value_frequency_map);
 
     ASSERT_NE(huffman_tree.GetRoot(), nullptr);

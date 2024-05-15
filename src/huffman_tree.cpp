@@ -4,12 +4,6 @@ HuffmanTree::HuffmanTree(const std::unordered_map<unsigned char, unsigned int>& 
     : m_root(nullptr)
 {
     NodePriorityQueue nodes_queue = CreateNodesQueue(value_frequency_map);
-    if (nodes_queue.size() == 1)
-    {
-        m_root = nodes_queue.top();
-        nodes_queue.pop();
-        return;
-    }
 
     while (nodes_queue.size() > 1)
     {

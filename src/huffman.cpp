@@ -4,11 +4,16 @@
 std::vector<unsigned char> Huffman::Encode(const std::vector<unsigned char>& data)
 {
     HuffmanTree tree(algo_utils::CountUniqueValueFrequencies(data));
+    if (tree.GetRoot() == nullptr)
+    {
+        return {};
+    }
+
     DetermineCodes(tree.GetRoot());
-    return ReplaceDataForCodes(data, m_huffman_codes_map);
+    return ReplaceDataForCodes(data);
 }
 
-std::unordered_map<unsigned char, std::string> Huffman::DetermineCodes(
+void Huffman::DetermineCodes(
     std::shared_ptr<HuffmanTreeNode>& node)
 {
     if (node->left != nullptr)
@@ -29,13 +34,9 @@ std::unordered_map<unsigned char, std::string> Huffman::DetermineCodes(
     {
         m_huffman_codes_map[node->value] = m_huffman_code;
     }
-
-    return m_huffman_codes_map;
 }
 
-std::vector<unsigned char> Huffman::ReplaceDataForCodes(
-    const std::vector<unsigned char>& data,
-    std::unordered_map<unsigned char, std::string>& huffman_codes)
+std::vector<unsigned char> Huffman::ReplaceDataForCodes(const std::vector<unsigned char>& data)
 {
     std::vector<unsigned char> compressed_data;
     unsigned char compressed_byte = 0;
@@ -43,7 +44,7 @@ std::vector<unsigned char> Huffman::ReplaceDataForCodes(
 
     for (auto value : data)
     {
-        const std::string& code = huffman_codes[value];
+        const std::string& code = m_huffman_codes_map[value];
         for (char bit : code)
         {
             compressed_byte <<= 1;

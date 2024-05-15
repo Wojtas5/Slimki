@@ -15,11 +15,8 @@ private:
     std::unordered_map<unsigned char, std::string> m_huffman_codes_map;
     std::string m_huffman_code;
 
-    std::unordered_map<unsigned char, std::string> DetermineCodes(
-        std::shared_ptr<HuffmanTreeNode>& root);
-    std::vector<unsigned char> ReplaceDataForCodes(
-        const std::vector<unsigned char>& data,
-        std::unordered_map<unsigned char, std::string>& huffman_codes);
+    void DetermineCodes(std::shared_ptr<HuffmanTreeNode>& root);
+    std::vector<unsigned char> ReplaceDataForCodes(const std::vector<unsigned char>& data);
 };
 
 #endif // HUFFMAN_H
